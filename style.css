@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Yusei+Magic&display=swap");
+
+.person-item-container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.btn-rubrica {
+  height: fit-content;
+  margin-inline: 2px;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: rgb(230, 230, 230);
+}
+
+#text-input-field , #name-input-field , #surname-input-field{
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  width: 80px;
+  border: none;
+  border-bottom: 1px solid #757575;
+}
+main {
+text-align: center;
+  padding: 2%;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.041);
+  border-radius: 0em;
+  width: 300px;
+  margin: auto;
+  font: menu;
+}
+
+#person-name,
+#person-surname,
+#person-id {
+  margin-inline: 4px;
+  margin-inline-start: 0;
+  margin-top: 1px;
+  font-weight: bolder;
+ 
+  font-size: 1.4em;
+}
+
+#person-surname {
+  width: max-content;
+}
+
+.input-group {
+  margin-bottom: 5%;
+  display: flex;
+  flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#add-button {
+  border: 0px solid transparent;
+}
+
+button {
+  width: fit-content;
+  height: fit-content;
+  border: 0px solid transparent;
+  background-color: white;
+}
+
+.person-info {
+  font-weight: bolder;
+  font-variant: small-caps;
+}
