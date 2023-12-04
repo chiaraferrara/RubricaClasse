@@ -22,6 +22,12 @@ class RegistroClasse {
         this.studenti[indice].cognome = nuovoCognome;
         console.log(this.studenti)
     }
+
+    // delete student
+    eliminaStudente(id) {
+        this.studenti = this.studenti.filter(studente => studente.id !== id);
+        console.log(this.studenti)
+    }
 }
 
 const nameinput = document.querySelector('#name-input-field');
@@ -29,6 +35,8 @@ const surnameinput = document.querySelector('#surname-input-field');
 const addButton = document.querySelector('#add-button');
 const container = document.querySelector('.people-container');
 const editarea = document.querySelector('.edit-container');
+
+
 
 const registro = new RegistroClasse(); //oggetto registro instanziato
 
@@ -54,10 +62,16 @@ addButton.addEventListener('click', () => {
         const personContainer = document.createElement('div');
         personContainer.classList.add('person-item-container');
         container.appendChild(personContainer);
+
+
+    //     personContainer.style.display = 'grid';
+    // personContainer.style.gridTemplateColumns = 'auto auto auto auto auto';
+
+
         // id. Nome Cognome
         const paragraphId = document.createElement('p');
         paragraphId.id = 'person-id';
-        paragraphId.innerText = `${id}`;
+        paragraphId.innerText = `${id}` + ' .';
         personContainer.appendChild(paragraphId);
 
         const paragraphName = document.createElement('p');
@@ -165,8 +179,6 @@ addButton.addEventListener('click', () => {
         deleteBtn.appendChild(deleteimg);
         personContainer.appendChild(deleteBtn);
 
-        //se clicco devo eliminare la persona!!
-
         //se clicco devo eliminare la persona
         deleteBtn.addEventListener('click', () => {
             if (click == false) {
@@ -174,8 +186,9 @@ addButton.addEventListener('click', () => {
                 container.removeChild(personContainer);
 
                 // rimuove la persona dalla mappa
-                delete peopleMap[id];
-                console.log(peopleMap);
+                const editedStudent = registro.studenti.find(student => student.id === id);
+                //metodo eliminaStudente della classe!
+                registro.eliminaStudente(id)
             } else {
                 return;
             }
