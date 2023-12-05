@@ -1,15 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Yusei+Magic&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap');
 
+.container{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+header, h1{
+  text-align: center;
+  font-size: 2em;
+}
 .person-item-container {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
   margin-bottom: 10px;
+  width: 50rem;
 }
 .btn-rubrica {
   height: fit-content;
@@ -18,7 +30,8 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #e1e1e2;
+  background-color: #ffffff;
+  font-size: 12px;
 }
 
 #text-input-field,
@@ -30,14 +43,17 @@ body {
   border: none;
   border-bottom: 1px solid #bdbdbd;
 }
-main {
+section {
   text-align: center;
   padding: 2%;
   background-color: white;
   border-radius: 0em;
-  width: 90%;
+  width: 60%;
   margin: auto;
+  box-shadow: 0px 12px 18px #ececec;
+  
 }
+
 
 #person-name,
 #person-surname,
@@ -76,4 +92,17 @@ button {
 .person-info {
   font-weight: bolder;
   font-variant: small-caps;
+}
+
+p{
+  font-size: 2em;
+  font-family: 'Mulish', sans-serif;
+}
+
+
+.grade-container{
+  width: 300px;
+  border-radius: 1em;
+  box-shadow: 2px 5px 2px #00000036;
+  font-size: 12px;
 }

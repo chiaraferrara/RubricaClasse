@@ -28,6 +28,22 @@ class RegistroClasse {
         this.studenti = this.studenti.filter(studente => studente.id !== id);
         console.log(this.studenti)
     }
+
+
+    aggiungiVoti(id, voto, data, descrizione) {
+        const studente = this.studenti.find(studente => studente.id === id);
+        if (studente) {
+            studente.voti.push({
+                voto: voto,
+                data: data,
+                descrizione: descrizione,
+            })
+            console.log(this.studenti)
+        } else {
+            console.log("Non trovato")
+        }
+    }
+
 }
 
 const nameinput = document.querySelector('#name-input-field');
@@ -35,8 +51,9 @@ const surnameinput = document.querySelector('#surname-input-field');
 const addButton = document.querySelector('#add-button');
 const container = document.querySelector('.people-container');
 const editarea = document.querySelector('.edit-container');
+const addgrade = document.querySelector('.grade-container');
 
-
+const breakLine = document.createElement('br');
 
 const registro = new RegistroClasse(); //oggetto registro instanziato
 
@@ -64,8 +81,8 @@ addButton.addEventListener('click', () => {
         container.appendChild(personContainer);
 
 
-    //     personContainer.style.display = 'grid';
-    // personContainer.style.gridTemplateColumns = 'auto auto auto auto auto';
+        //     personContainer.style.display = 'grid';
+        // personContainer.style.gridTemplateColumns = 'auto auto auto auto auto';
 
 
         // id. Nome Cognome
@@ -96,6 +113,14 @@ addButton.addEventListener('click', () => {
         editimg.src = 'edit.svg'
         editButton.appendChild(editimg);
         personContainer.appendChild(editButton); //fa apparire il bottone edit all'interno di people-container.
+
+        //aggiungi voto
+        const gradeButton = document.createElement('button');
+        gradeButton.id = 'add-grade';
+        const gradeimg = document.createElement('img');
+        gradeimg.src = 'grade.svg'
+        gradeButton.appendChild(gradeimg);
+        personContainer.appendChild(gradeButton);
 
         //se clicco devo modificare le info 
 
@@ -195,6 +220,95 @@ addButton.addEventListener('click', () => {
 
 
         });
+
+        const voto = "";
+        const descrizione = "";
+        const data = "";
+
+        //se clicco aggiungi voto devo poter aggiungere un voto.
+        //durante l'aggiunta del voto non voglio che si possa eliminare lo studente.
+        //durante l'aggiunta del voto non posso modificare lo studente.
+        gradeButton.addEventListener('click', () => {
+           console.log(click)
+            if (click == false) {
+                editButton.disabled = true;
+                deleteBtn.disabled = true;
+                gradeButton.disabled = true;
+                addButton.disabled = true;
+                const votoText = document.createElement('p');
+                votoText.type = 'text';
+                votoText.innerText = 'Inserisci un voto: ';
+
+
+                const votoInput = document.createElement('input');
+                votoInput.type = 'text';
+                votoInput.value = voto;
+                votoInput.placeholder = 'Voto';
+                votoInput.id = 'text-input-field';
+                addgrade.appendChild(votoText);
+                addgrade.appendChild(votoInput);
+
+
+                const descrText = document.createElement('p');
+                descrText.type = 'text';
+                descrText.innerText = 'Inserisci un commento: ';
+
+                const descrInput = document.createElement('textarea');
+                descrInput.type = 'text';
+                descrInput.value = descrizione;
+                descrInput.placeholder = 'Commento';
+                descrInput.id = 'text-input-field';
+
+                const dateText = document.createElement('p');
+                dateText.type = 'text';
+                dateText.innerText = 'Inserisci la data: ';
+
+                const dateInput = document.createElement('input');
+                dateInput.type = 'date';
+                dateInput.value = data;
+                dateInput.placeholder = 'YYYY-MM-DD';
+                dateInput.id = 'date-input-field';
+
+                addgrade.appendChild(descrText);
+                addgrade.appendChild(descrInput);
+                addgrade.appendChild(dateText);
+                addgrade.appendChild(dateInput);
+                addgrade.appendChild(breakLine);
+
+                const saveGrade = document.createElement('button');
+                const saveimg = document.createElement('img');
+                saveimg.src = 'save.svg';
+                saveGrade.appendChild(saveimg);
+                addgrade.appendChild(breakLine);
+                addgrade.appendChild(breakLine);
+                addgrade.appendChild(saveGrade);
+                // registro.aggiungiVoti(id, votoInput.value, dateInput.value, descrInput.value);
+                //Da implementare un tasto close.
+                saveGrade.addEventListener('click', () => {
+                    registro.aggiungiVoti(id, votoInput.value, dateInput.value, descrInput.value);
+
+                    addgrade.removeChild(votoText);
+                    addgrade.removeChild(votoInput);
+                    addgrade.removeChild(descrText);
+                    addgrade.removeChild(descrInput);
+                    addgrade.removeChild(dateText);
+                    addgrade.removeChild(dateInput);
+                    addgrade.removeChild(breakLine);
+                    addgrade.removeChild(saveGrade);
+
+                    editButton.disabled = false;
+                    deleteBtn.disabled = false;
+                    gradeButton.disabled = false;
+                    addButton.disabled = false;
+                });
+
+            } else {
+                return;
+            }
+
+
+        });
+
 
 
         nameinput.value = '' //questo fa sì che una volta che clicchi sul button si elimini il value. Non si vede niente nell'input.
