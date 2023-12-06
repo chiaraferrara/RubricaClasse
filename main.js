@@ -204,6 +204,13 @@ addButton.addEventListener('click', () => {
         deleteBtn.appendChild(deleteimg);
         personContainer.appendChild(deleteBtn);
 
+
+
+
+        const closeGrade = document.createElement('button');
+        const closeimg = document.createElement('img');
+        closeimg.src = 'close.svg'
+
         //se clicco devo eliminare la persona
         deleteBtn.addEventListener('click', () => {
             if (click == false) {
@@ -224,23 +231,24 @@ addButton.addEventListener('click', () => {
         const voto = "";
         const descrizione = "";
         const data = "";
-
+        let descrText, descrInput, dateText, dateInput, saveGrade;
         //se clicco aggiungi voto devo poter aggiungere un voto.
         //durante l'aggiunta del voto non voglio che si possa eliminare lo studente.
         //durante l'aggiunta del voto non posso modificare lo studente.
         gradeButton.addEventListener('click', () => {
-           console.log(click)
+            console.log(click)
             if (click == false) {
                 editButton.disabled = true;
                 deleteBtn.disabled = true;
                 gradeButton.disabled = true;
                 addButton.disabled = true;
-                const votoText = document.createElement('p');
+                addgrade.disabled = true;
+                votoText = document.createElement('p');
                 votoText.type = 'text';
                 votoText.innerText = 'Inserisci un voto: ';
 
 
-                const votoInput = document.createElement('input');
+                votoInput = document.createElement('input');
                 votoInput.type = 'text';
                 votoInput.value = voto;
                 votoInput.placeholder = 'Voto';
@@ -249,21 +257,21 @@ addButton.addEventListener('click', () => {
                 addgrade.appendChild(votoInput);
 
 
-                const descrText = document.createElement('p');
+                descrText = document.createElement('p');
                 descrText.type = 'text';
                 descrText.innerText = 'Inserisci un commento: ';
 
-                const descrInput = document.createElement('textarea');
+                descrInput = document.createElement('textarea');
                 descrInput.type = 'text';
                 descrInput.value = descrizione;
                 descrInput.placeholder = 'Commento';
                 descrInput.id = 'text-input-field';
 
-                const dateText = document.createElement('p');
+                dateText = document.createElement('p');
                 dateText.type = 'text';
                 dateText.innerText = 'Inserisci la data: ';
 
-                const dateInput = document.createElement('input');
+                dateInput = document.createElement('input');
                 dateInput.type = 'date';
                 dateInput.value = data;
                 dateInput.placeholder = 'YYYY-MM-DD';
@@ -275,13 +283,22 @@ addButton.addEventListener('click', () => {
                 addgrade.appendChild(dateInput);
                 addgrade.appendChild(breakLine);
 
-                const saveGrade = document.createElement('button');
+                saveGrade = document.createElement('button');
                 const saveimg = document.createElement('img');
                 saveimg.src = 'save.svg';
+
+
+                // const closeGrade = document.createElement('button');
+                // const closeimg = document.createElement('img');
+                // closeimg.src= 'close.svg'
                 saveGrade.appendChild(saveimg);
                 addgrade.appendChild(breakLine);
                 addgrade.appendChild(breakLine);
                 addgrade.appendChild(saveGrade);
+
+                closeGrade.appendChild(closeimg);
+                addgrade.appendChild(closeGrade);
+
                 // registro.aggiungiVoti(id, votoInput.value, dateInput.value, descrInput.value);
                 //Da implementare un tasto close.
                 saveGrade.addEventListener('click', () => {
@@ -294,12 +311,13 @@ addButton.addEventListener('click', () => {
                     addgrade.removeChild(dateText);
                     addgrade.removeChild(dateInput);
                     addgrade.removeChild(breakLine);
+                    addgrade.appendChild(breakLine);
                     addgrade.removeChild(saveGrade);
-
+                    addgrade.removeChild(closeGrade);
                     editButton.disabled = false;
                     deleteBtn.disabled = false;
-                    gradeButton.disabled = false;
                     addButton.disabled = false;
+                    
                 });
 
             } else {
@@ -307,8 +325,26 @@ addButton.addEventListener('click', () => {
             }
 
 
-        });
 
+            closeGrade.addEventListener('click', () => {
+                addgrade.removeChild(votoText);
+                addgrade.removeChild(votoInput);
+                addgrade.removeChild(descrText);
+                addgrade.removeChild(descrInput);
+                addgrade.removeChild(dateText);
+                addgrade.removeChild(dateInput);
+                addgrade.removeChild(breakLine);
+                addgrade.removeChild(saveGrade);
+                addgrade.removeChild(closeGrade);
+
+                editButton.disabled = false;
+                deleteBtn.disabled = false;
+                gradeButton.disabled = false;
+                addButton.disabled = false;
+
+
+            })
+        });
 
 
         nameinput.value = '' //questo fa sì che una volta che clicchi sul button si elimini il value. Non si vede niente nell'input.
