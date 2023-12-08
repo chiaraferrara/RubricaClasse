@@ -1,19 +1,22 @@
 class RegistroClasse {
     constructor() {
-        this.studenti = [];
-
+        this.countid = JSON.parse(localStorage.getItem('countid')) || 1;
+        this.studenti = JSON.parse(localStorage.getItem('studenti')) || [];
+        
     }
 
     aggiungiStudente(id, nome, cognome) {
         const studente = {
-            id: id,
+            id: this.countid++,
             nome: nome,
             cognome: cognome,
             voti: [],
         }
         this.studenti.push(studente);
         console.log(this.studenti)
+        this.salvaDatiLocalStorage();
         return studente;
+
     }
 
     modificaInfo(id, nuovoNome, nuovoCognome) {
@@ -21,12 +24,22 @@ class RegistroClasse {
         this.studenti[indice].nome = nuovoNome;
         this.studenti[indice].cognome = nuovoCognome;
         console.log(this.studenti)
+        this.salvaDatiLocalStorage();
+    }
+//questo metodo nasce dall'esigenza di riassegnare l'id dopo che uno studente viene eliminato
+    riassegnaID() {
+        this.studenti.forEach((studente, index) => {
+            studente.id = index + 1;
+        });
+        this.salvaDatiLocalStorage();
     }
 
     // delete student
     eliminaStudente(id) {
         this.studenti = this.studenti.filter(studente => studente.id !== id);
+        this.riassegnaID();
         console.log(this.studenti)
+        this.salvaDatiLocalStorage();
     }
 
 
@@ -38,10 +51,17 @@ class RegistroClasse {
                 data: data,
                 descrizione: descrizione,
             })
-            console.log(this.studenti)
+            console.log(this.studenti);
+            this.salvaDatiLocalStorage();
         } else {
             console.log("Non trovato")
         }
+
+    }
+
+    salvaDatiLocalStorage() {
+        localStorage.setItem('countid', JSON.stringify(this.countid));
+        localStorage.setItem('studenti', JSON.stringify(this.studenti));
     }
 
 }
@@ -60,51 +80,35 @@ const registro = new RegistroClasse(); //oggetto registro instanziato
 var countid = 1;
 var click = false;
 
+
+
+
 // metodo callback. una volta cliccato aggiungerà dal text-input
-addButton.addEventListener('click', () => {
-    const nameInput = document.getElementById('name-input-field');
-    const surnameInput = document.getElementById('surname-input-field');
-
-    if (!nameInput || !surnameInput || nameInput.value.trim() === '' || surnameInput.value.trim() === '') {
-        return;
-    } else {
-        const name = nameInput.value;
-        const surname = surnameInput.value;
-        const id = countid++;
-
-
-
-
-
-        const personContainer = document.createElement('div');
-        personContainer.classList.add('person-item-container');
-        container.appendChild(personContainer);
-
-
-        //     personContainer.style.display = 'grid';
-        // personContainer.style.gridTemplateColumns = 'auto auto auto auto auto';
-
-
-        // id. Nome Cognome
-        const paragraphId = document.createElement('p');
-        paragraphId.id = 'person-id';
-        paragraphId.innerText = `${id}` + ' .';
-        personContainer.appendChild(paragraphId);
-
-        const paragraphName = document.createElement('p');
-        paragraphName.id = 'person-name';
-        paragraphName.innerText = `${name} `;
-        personContainer.appendChild(paragraphName);
-
-
-        const paragraphSurname = document.createElement('p');
-        paragraphSurname.id = 'person-surname';
-        paragraphSurname.innerText = `${surname}`;
-        personContainer.appendChild(paragraphSurname);
-
-        //metodo aggiungiStudente della classe
-        registro.aggiungiStudente(id, name, surname);
-
+document.addEventListener('DOMContentLoaded', () => {
+           registro.studenti.forEach((studente) => {
+            const id = studente.id;
+            const name = studente.nome;
+            const surname = studente.cognome;
+    
+            const personContainer = document.createElement('div');
+            personContainer.classList.add('person-item-container');
+            container.appendChild(personContainer);
+    
+            const paragraphId = document.createElement('p');
+            paragraphId.id = 'person-id';
+            paragraphId.innerText = `${id}` + ' .';
+            personContainer.appendChild(paragraphId);
+    
+            const paragraphName = document.createElement('p');
+            paragraphName.id = 'person-name';
+            paragraphName.innerText = `${name} `;
+            personContainer.appendChild(paragraphName);
+    
+            const paragraphSurname = document.createElement('p');
+            paragraphSurname.id = 'person-surname';
+            paragraphSurname.innerText = `${surname}`;
+            personContainer.appendChild(paragraphSurname);
+    
 
         //bottone edit
         const editButton = document.createElement('button');
@@ -121,7 +125,7 @@ addButton.addEventListener('click', () => {
         gradeimg.src = 'grade.svg'
         gradeButton.appendChild(gradeimg);
         personContainer.appendChild(gradeButton);
-
+        
         //se clicco devo modificare le info 
 
         editButton.addEventListener('click', () => {
@@ -212,20 +216,18 @@ addButton.addEventListener('click', () => {
         closeimg.src = 'close.svg'
 
         //se clicco devo eliminare la persona
-        deleteBtn.addEventListener('click', () => {
+        deleteBtn.addEventListener('click', () => {     
             if (click == false) {
                 // rimuove l'elemento html
                 container.removeChild(personContainer);
 
-                // rimuove la persona dalla mappa
-                const editedStudent = registro.studenti.find(student => student.id === id);
-                //metodo eliminaStudente della classe!
-                registro.eliminaStudente(id)
+                // rimuove la persona
+                registro.eliminaStudente(id) 
             } else {
                 return;
-            }
-
-
+            }      
+                
+          
         });
 
         const voto = "";
@@ -303,17 +305,8 @@ addButton.addEventListener('click', () => {
                 //Da implementare un tasto close.
                 saveGrade.addEventListener('click', () => {
                     registro.aggiungiVoti(id, votoInput.value, dateInput.value, descrInput.value);
-
-                    addgrade.removeChild(votoText);
-                    addgrade.removeChild(votoInput);
-                    addgrade.removeChild(descrText);
-                    addgrade.removeChild(descrInput);
-                    addgrade.removeChild(dateText);
-                    addgrade.removeChild(dateInput);
-                    addgrade.removeChild(breakLine);
-                    addgrade.appendChild(breakLine);
-                    addgrade.removeChild(saveGrade);
-                    addgrade.removeChild(closeGrade);
+                    const parentElement = addgrade.parentElement; //questo consente di eliminare tutti il ParentElement (addgrade)
+                    parentElement.removeChild(addgrade);
                     editButton.disabled = false;
                     deleteBtn.disabled = false;
                     addButton.disabled = false;
@@ -327,15 +320,8 @@ addButton.addEventListener('click', () => {
 
 
             closeGrade.addEventListener('click', () => {
-                addgrade.removeChild(votoText);
-                addgrade.removeChild(votoInput);
-                addgrade.removeChild(descrText);
-                addgrade.removeChild(descrInput);
-                addgrade.removeChild(dateText);
-                addgrade.removeChild(dateInput);
-                addgrade.removeChild(breakLine);
-                addgrade.removeChild(saveGrade);
-                addgrade.removeChild(closeGrade);
+                const parentElement = addgrade.parentElement;
+                parentElement.removeChild(addgrade);
 
                 editButton.disabled = false;
                 deleteBtn.disabled = false;
@@ -350,4 +336,22 @@ addButton.addEventListener('click', () => {
         nameinput.value = '' //questo fa sì che una volta che clicchi sul button si elimini il value. Non si vede niente nell'input.
         surnameinput.value = ''
     }
+)
 })
+addButton.addEventListener('click', () => {
+    const nameInput = document.getElementById('name-input-field');
+    const surnameInput = document.getElementById('surname-input-field');
+
+    if (!nameInput || !surnameInput || nameInput.value.trim() === '' || surnameInput.value.trim() === '') {
+        return;
+    } else {
+        const name = nameInput.value;
+        const surname = surnameInput.value;
+        const id = countid++;
+
+        registro.aggiungiStudente(id, name, surname);
+
+        // Aggiorna la pagina dopo aver aggiunto uno studente
+        location.reload();
+    }
+});
