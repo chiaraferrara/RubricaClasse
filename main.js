@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = studente.id;
             const name = studente.nome;
             const surname = studente.cognome;
+            registro.riassegnaID();
     
             const personContainer = document.createElement('div');
             personContainer.classList.add('person-item-container');
@@ -222,7 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.removeChild(personContainer);
 
                 // rimuove la persona
-                registro.eliminaStudente(id) 
+                registro.eliminaStudente(id);
+                location.reload();
             } else {
                 return;
             }      
