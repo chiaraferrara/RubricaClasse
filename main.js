@@ -65,38 +65,25 @@ class RegistroClasse {
     }
     //abilita i bottoni
     enableButtons() {
-        const editButton = document.getElementById('edit-info');
-        const deleteBtn = document.getElementById('delete-btn');
-        const addButton = document.getElementById('add-button');
-        const gradeButton = document.getElementById('add-grade');
-        const viewGrade = document.getElementById('viewgrade-btn');
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.disabled = false;
+        });
 
-        if (editButton && deleteBtn && addButton && gradeButton && viewGrade) {
-            const isDisabled = this.editing;
-            editButton.disabled = isDisabled;
-            deleteBtn.disabled = isDisabled;
-            addButton.disabled = isDisabled;
-            gradeButton.disabled = isDisabled;
-            viewGrade.disabled = isDisabled;
-        }
+    
+        
     }
     //disabilita bottoni
     disableButtons() {
-        const editButton = document.getElementById('edit-info');
-        const deleteBtn = document.getElementById('delete-btn');
-        const addButton = document.getElementById('add-button');
-        const gradeButton = document.getElementById('add-grade');
-        const viewGrade = document.getElementById('viewgrade-btn');
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.disabled = true;
+        });
 
-        if (editButton && deleteBtn && addButton && gradeButton && viewGrade) {
-            const isDisabled = true;
-            editButton.disabled = isDisabled;
-            deleteBtn.disabled = isDisabled;
-            addButton.disabled = isDisabled;
-            gradeButton.disabled = isDisabled;
-            viewGrade.disabled = isDisabled;
-        }
+     
     }
+
+    
 }
 
 const nameinput = document.querySelector('#name-input-field');
@@ -105,6 +92,7 @@ const addButton = document.querySelector('#add-button');
 const container = document.querySelector('.people-container');
 const editarea = document.querySelector('.edit-container');
 const addgrade = document.querySelector('.grade-container');
+const viewcontainer = document.querySelector('.view-container');
 
 const breakLine = document.createElement('br');
 
@@ -165,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         editButton.addEventListener('click', () => {
             registro.disableButtons();
-
+            
 
 
             const editedStudent = registro.studenti.find(student => student.id === id); //trovo l'id dello studente per risalire a nome e cognome
@@ -178,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const newNameInput = document.createElement('input');
             newNameInput.type = 'text';
-            newNameInput.value = name;
+            newNameInput.value = `${editedStudent.nome}`;
             newNameInput.placeholder = 'Nuovo Nome';
             newNameInput.id = 'text-input-field';
 
@@ -186,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const newSurnameInput = document.createElement('input');
             newSurnameInput.type = 'text';
-            newSurnameInput.value = surname;
+            newSurnameInput.value = `${editedStudent.cognome}`;;
             newSurnameInput.placeholder = 'Nuovo Cognome';
             newSurnameInput.id = 'text-input-field';
 
@@ -243,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //eventListener viewVoti
         viewGrade.addEventListener('click', () => {
+            
             const student = registro.studenti.find(studente => studente.id === id);
             if (student) {
                 registro.disableButtons();
@@ -291,8 +280,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Append table to container
                 tableContainer.appendChild(table);
-                //appendchild
-                container.appendChild(tableContainer);
+
+        // Aggiungi tableContainer a viewcontainer
+        viewcontainer.appendChild(tableContainer);
 
                 // Chiudi btn
                 const closeTableButton = document.createElement('button');
@@ -300,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeTableImg.src = 'assets/closesmall.svg';
                 closeTableButton.appendChild(closeTableImg);
                 closeTableButton.addEventListener('click', () => {
-                    container.removeChild(tableContainer);
+                    viewcontainer.removeChild(tableContainer);
                     registro.enableButtons();
                 });
                 tableContainer.appendChild(closeTableButton);

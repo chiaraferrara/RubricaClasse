@@ -4,19 +4,21 @@
 
 body {
   font-family: "League Spartan", sans-serif;
-  background-color: #f8f8f8;
+  background-color: #ffffff;
   font-size: 16px;
   margin: 0;
   padding: 0;
 }
-
 .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
   padding: 20px;
+  transition: justify-content 1s ease-in-out; 
 }
+
+
 
 header, h1 {
   text-align: center;
@@ -25,6 +27,7 @@ header, h1 {
 }
 
 .person-item-container {
+  position: static;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -33,7 +36,8 @@ header, h1 {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
-  width: 400px;
+  margin: auto;
+  width: 79rem;
 }
 
 .person-item-container img {
@@ -52,7 +56,7 @@ header, h1 {
 #surname-input-field {
   font-size: 16px;
   padding: 10px;
-  width: 100%;
+  width: 20%;
   border: none;
   border-bottom: 1px solid #bdbdbd;
   margin-bottom: 10px;
@@ -103,8 +107,7 @@ transition: background 0.5s ease-in-out;
 }
 
 button:disabled {
-  background-color: #f0f0f0;
-  color: gray;
+  background-color: #ffffff;
   cursor: not-allowed;
 }
 
@@ -123,24 +126,22 @@ p {
 .grade-container {
   width: 300px;
   border-radius: 1em;
-  box-shadow: 2px 5px 2px #00000036;
   font-size: 14px;
-  margin-top: -152px;
-  background-color: #ffffff;
+  /* margin-top: -152px; */
   padding: 20px;
-  visibility: hidden;
-  opacity: 0;
   transition: visibility 0s, opacity 0.5s ease-in-out;
 }
 
 
 .grade-container.visible {
-  visibility: visible;
+  display: block; 
   opacity: 1;
+  background-color: #ffffff;
+  box-shadow: 2px 5px 2px #00000036;
 }
 
 .grade-container.hidden {
-  visibility: hidden;
+  display: none; 
   opacity: 0;
 }
 
@@ -154,27 +155,55 @@ p {
   border-radius: 1em;
 }
 
+textarea{
+  min-width: 100%;
+}
+
 .edit-info-container {
-  margin-top: 10px;
+  width: 300px;
+  margin-left: -359px;
+  border-radius: 1em;
+  font-size: 14px;
+  background-color: #ffffff;
+  padding: 20px;
+  position: absolute;
+  /* margin-top: -60px; */
+}
+
+.view-container{
+  width: 300px;
+  position: absolute;
 }
 
 @media only screen and (max-width: 768px) {
   .container {
-    justify-content: flex-start;
+    flex-direction: column; 
+    align-items: center; 
   }
 
   .person-item-container {
     width: 100%;
   }
-
+.people-container{
+  display: flex;
+  flex-flow: column;
+  flex-direction: column;
+  align-content: space-around;
+  align-items: center;
+}
   .grade-container {
-    position: absolute;
+    position: static;
     width: 100%;
-    padding: 10px;
-    visibility: hidden;
+    margin-top: 0;
+    box-shadow: none;
+    border-radius: 0;
+    margin-top: -371px;
+    margin-left: -5px;
   }
 
   .edit-info-container {
+    margin-left: auto;
+    position: static;
     margin-top: 0;
   }
 }
