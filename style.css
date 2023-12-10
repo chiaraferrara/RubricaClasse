@@ -30,7 +30,7 @@ header, h1{
 
 body {
   font-family: "Roboto", sans-serif;
-  background: #cddde5;
+  background: #ffffff;
   font-size: 12px;
 }
 
@@ -49,7 +49,7 @@ section {
   background-color: white;
   border-radius: 0em;
   margin: auto;
-  box-shadow: 1px 8px 13px #7e7e7e6e;
+  /* box-shadow: 1px 8px 13px #ffffff6e; */
   
 }
 
@@ -104,4 +104,12 @@ p{
   border-radius: 1em;
   box-shadow: 2px 5px 2px #00000036;
   font-size: 12px;
+  margin-top: -152px;
+  position: relative;
+}
+
+
+.grade-table-container{
+  font-size: 20px;
+  width: fit-content;
 }
