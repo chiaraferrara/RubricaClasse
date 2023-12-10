@@ -2,7 +2,7 @@
 
 ## Descrizione
 Questo script implementa un'applicazione web per gestire una lista di persone. Gli utenti possono eseguire operazioni CRUD (Create, Read, Update, Delete) per gestire le informazioni sulla lista.
-[https://chiaraferrara.github.io/Rubrica-Crud-JS/](https://chiaraferrara.github.io/RubricaClasse/)
+[Deployment](https://chiaraferrara.github.io/RubricaClasse/)
 ## Operazioni CRUD
 
 ### Creazione di una Persona
