@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const editButton = document.createElement('button');
         editButton.id = 'edit-info';
         const editimg = document.createElement('img');
-        editimg.src = 'edit.svg'
+        editimg.src = 'assets/edit.svg'
         editButton.appendChild(editimg);
         personContainer.appendChild(editButton); //fa apparire il bottone edit all'interno di people-container.
 
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const gradeButton = document.createElement('button');
         gradeButton.id = 'add-grade';
         const gradeimg = document.createElement('img');
-        gradeimg.src = 'grade.svg'
+        gradeimg.src = 'assets/grade.svg'
         gradeButton.appendChild(gradeimg);
         personContainer.appendChild(gradeButton);
 
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const saveButton = document.createElement('button');
 
             const saveimg = document.createElement('img');
-            saveimg.src = 'save.svg'
+            saveimg.src = 'assets/save.svg'
             saveButton.appendChild(saveimg);
             saveButton.addEventListener('click', () => {
                 const editedStudent = registro.studenti.find(student => student.id === id);
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const viewGrade = document.createElement('button')
         viewGrade.id = 'viewgrade-btn';
         const viewimg = document.createElement('img');
-        viewimg.src = 'viewtable.svg';
+        viewimg.src = 'assets/viewtable.svg';
         viewGrade.appendChild(viewimg);
         personContainer.appendChild(viewGrade);
 
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Chiudi btn
                 const closeTableButton = document.createElement('button');
                 const closeTableImg = document.createElement('img');
-                closeTableImg.src = 'close.svg';
+                closeTableImg.src = 'assets/close.svg';
                 closeTableButton.appendChild(closeTableImg);
                 closeTableButton.addEventListener('click', () => {
                     container.removeChild(tableContainer);
@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const deleteBtn = document.createElement('button');
         deleteBtn.id = 'delete-btn';
         const deleteimg = document.createElement('img');
-        deleteimg.src = 'delete.svg';
+        deleteimg.src = 'assets/delete.svg';
         deleteBtn.appendChild(deleteimg);
         personContainer.appendChild(deleteBtn);
 
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const closeGrade = document.createElement('button');
         const closeimg = document.createElement('img');
-        closeimg.src = 'close.svg'
+        closeimg.src = 'assets/close.svg'
 
         //se clicco devo eliminare la persona
         deleteBtn.addEventListener('click', () => {
@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             saveGrade = document.createElement('button');
             const saveimg = document.createElement('img');
-            saveimg.src = 'save.svg';
+            saveimg.src = 'assets/save.svg';
 
 
             // const closeGrade = document.createElement('button');
