@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Yusei+Magic&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&display=swap");
 .container{
   display: flex;
   flex-flow: row wrap;
@@ -29,7 +29,7 @@ header, h1{
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "League Spartan", system-ui, sans-serif;
   background: #ffffff;
   font-size: 12px;
 }
@@ -87,7 +87,11 @@ button {
   border: 0px solid transparent;
   background-color: white;
 }
-
+button:disabled {
+  background-color: rgb(255, 255, 255);
+  color: gray; 
+  cursor: not-allowed;
+}
 .person-info {
   font-weight: bolder;
   font-variant: small-caps;
@@ -112,4 +116,33 @@ p{
 .grade-table-container{
   font-size: 20px;
   width: fit-content;
+}
+
+.edit-info-container{
+  margin-top: -50px;
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+  
+    justify-content: flex-start;
+  }
+
+  .person-item-container {
+    
+    width: 100%;
+  }
+
+  .grade-container {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+  }
+
+  .edit-info-container {
+  
+    margin-top: 0;
+    margin-left: 0;
+  }
 }

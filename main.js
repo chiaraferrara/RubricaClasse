@@ -2,7 +2,7 @@ class RegistroClasse {
     constructor() {
         this.countid = JSON.parse(localStorage.getItem('countid')) || 1;
         this.studenti = JSON.parse(localStorage.getItem('studenti')) || [];
-
+        this.editing = false;
     }
 
     aggiungiStudente(id, nome, cognome) {
@@ -63,9 +63,8 @@ class RegistroClasse {
         localStorage.setItem('countid', JSON.stringify(this.countid));
         localStorage.setItem('studenti', JSON.stringify(this.studenti));
     }
-
-    //tentativo di risolvere bug bottoni disabilitati.
-    enableBtn() {
+//abilita i bottoni
+    enableButtons() {
         const editButton = document.getElementById('edit-info');
         const deleteBtn = document.getElementById('delete-btn');
         const addButton = document.getElementById('add-button');
@@ -73,11 +72,29 @@ class RegistroClasse {
         const viewGrade = document.getElementById('viewgrade-btn');
 
         if (editButton && deleteBtn && addButton && gradeButton && viewGrade) {
-            editButton.disabled = false;
-            deleteBtn.disabled = false;
-            addButton.disabled = false;
-            gradeButton.disabled = false;
-            viewGrade.disabled = false;
+            const isDisabled = this.editing;
+            editButton.disabled = isDisabled;
+            deleteBtn.disabled = isDisabled;
+            addButton.disabled = isDisabled;
+            gradeButton.disabled = isDisabled;
+            viewGrade.disabled = isDisabled;
+        }
+    }
+//disabilita bottoni
+    disableButtons() {
+        const editButton = document.getElementById('edit-info');
+        const deleteBtn = document.getElementById('delete-btn');
+        const addButton = document.getElementById('add-button');
+        const gradeButton = document.getElementById('add-grade');
+        const viewGrade = document.getElementById('viewgrade-btn');
+
+        if (editButton && deleteBtn && addButton && gradeButton && viewGrade) {
+            const isDisabled = true;
+            editButton.disabled = isDisabled;
+            deleteBtn.disabled = isDisabled;
+            addButton.disabled = isDisabled;
+            gradeButton.disabled = isDisabled;
+            viewGrade.disabled = isDisabled;
         }
     }
 }
@@ -145,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //se clicco devo modificare le info 
 
         editButton.addEventListener('click', () => {
-            editButton.disabled = true;
+            registro.disableButtons();
 
 
 
@@ -179,12 +196,13 @@ document.addEventListener('DOMContentLoaded', () => {
             saveButton.appendChild(saveimg);
             saveButton.addEventListener('click', () => {
                 const editedStudent = registro.studenti.find(student => student.id === id);
+                registro.enableButtons();
                 if (editedStudent) {
                     // questio aggiorna il nome e cognome con dei nuovi valori
                     editedStudent.nome = newNameInput.value;
                     editedStudent.cognome = newSurnameInput.value;
 
-
+                    registro.enableButtons();
                     //metodo modificaInfo della classe
                     registro.modificaInfo(id, editedStudent.nome, editedStudent.cognome)
 
@@ -194,11 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     paragraphSurname.innerText = `${editedStudent.cognome}`;
                     console.log('I nuovi dati:', newNameInput.value, newSurnameInput.value);
                     editarea.innerHTML = ''; //non si vedrà più nulla dopo aver salvato
-
-                    setTimeout(() => {
-                        registro.enableBtn();
-                    }, 0);
-
+                    
                 }
             });
 
@@ -210,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             editarea.appendChild(editContainer);
             editContainer.appendChild(saveButton);
-
+            
 
 
         })
@@ -278,10 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeTableButton.appendChild(closeTableImg);
                 closeTableButton.addEventListener('click', () => {
                     container.removeChild(tableContainer);
-                    setTimeout(() => {
-                        console.log('BOTTONI ON'); //vedo se si abilitano
-                        registro.enableBtn();
-                    }, 0);
+                    registro.enableButtons();
                 });
                 tableContainer.appendChild(closeTableButton);
             }
@@ -309,6 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // rimuove la persona
             registro.eliminaStudente(id);
+            //così l'id si aggiorna
             location.reload();
 
         });
@@ -321,13 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //durante l'aggiunta del voto non voglio che si possa eliminare lo studente.
         //durante l'aggiunta del voto non posso modificare lo studente.
         gradeButton.addEventListener('click', () => {
-
-            editButton.disabled = true;
-            deleteBtn.disabled = true;
-            gradeButton.disabled = true;
-            addButton.disabled = true;
-            addgrade.disabled = true;
-            viewGrade.disabled = true;
+            registro.disableButtons();
             votoText = document.createElement('p');
             votoText.type = 'text';
             votoText.innerText = 'Inserisci un voto: ';
@@ -387,21 +393,22 @@ document.addEventListener('DOMContentLoaded', () => {
             // registro.aggiungiVoti(id, votoInput.value, dateInput.value, descrInput.value);
             //Da implementare un tasto close.
             saveGrade.addEventListener('click', () => {
-                registro.enableBtn();
+                registro.enableButtons();
                 registro.aggiungiVoti(id, votoInput.value, dateInput.value, descrInput.value);
-                const parentElement = addgrade.parentElement; //questo consente di eliminare tutti il ParentElement (addgrade)
-                parentElement.removeChild(addgrade);
-
-
+                // const parentElement = addgrade.parentElement; //questo consente di eliminare tutti il ParentElement (addgrade)
+                // parentElement.removeChild(addgrade);
+                location.reload();
 
             });
 
 
 
             closeGrade.addEventListener('click', () => {
-                const parentElement = addgrade.parentElement;
-                parentElement.removeChild(addgrade);
-                registro.enableBtn();
+                registro.enableButtons();
+                // const parentElement = addgrade.parentElement;
+                // parentElement.removeChild(addgrade);
+                location.reload();
+                
 
             })
         });
@@ -413,6 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
     )
 })
 addButton.addEventListener('click', () => {
+    registro.enableButtons();
     const nameInput = document.getElementById('name-input-field');
     const surnameInput = document.getElementById('surname-input-field');
 
