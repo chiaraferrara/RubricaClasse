@@ -63,7 +63,7 @@ class RegistroClasse {
         localStorage.setItem('countid', JSON.stringify(this.countid));
         localStorage.setItem('studenti', JSON.stringify(this.studenti));
     }
-//abilita i bottoni
+    //abilita i bottoni
     enableButtons() {
         const editButton = document.getElementById('edit-info');
         const deleteBtn = document.getElementById('delete-btn');
@@ -80,7 +80,7 @@ class RegistroClasse {
             viewGrade.disabled = isDisabled;
         }
     }
-//disabilita bottoni
+    //disabilita bottoni
     disableButtons() {
         const editButton = document.getElementById('edit-info');
         const deleteBtn = document.getElementById('delete-btn');
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     paragraphSurname.innerText = `${editedStudent.cognome}`;
                     console.log('I nuovi dati:', newNameInput.value, newSurnameInput.value);
                     editarea.innerHTML = ''; //non si vedrà più nulla dopo aver salvato
-                    
+
                 }
             });
 
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             editarea.appendChild(editContainer);
             editContainer.appendChild(saveButton);
-            
+
 
 
         })
@@ -242,8 +242,14 @@ document.addEventListener('DOMContentLoaded', () => {
         viewGrade.addEventListener('click', () => {
             const student = registro.studenti.find(studente => studente.id === id);
             if (student) {
+                registro.disableButtons();
                 const tableContainer = document.createElement('div');
                 tableContainer.classList.add('grade-table-container');
+
+
+                const tableName = document.createElement('p');
+                tableName.innerText = `Voti di ${student.nome}`;
+                tableContainer.appendChild(tableName);
 
                 const table = document.createElement('table');
                 table.classList.add('grade-table');
@@ -288,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Chiudi btn
                 const closeTableButton = document.createElement('button');
                 const closeTableImg = document.createElement('img');
-                closeTableImg.src = 'assets/close.svg';
+                closeTableImg.src = 'assets/closesmall.svg';
                 closeTableButton.appendChild(closeTableImg);
                 closeTableButton.addEventListener('click', () => {
                     container.removeChild(tableContainer);
@@ -336,11 +342,13 @@ document.addEventListener('DOMContentLoaded', () => {
             registro.disableButtons();
             votoText = document.createElement('p');
             votoText.type = 'text';
-            votoText.innerText = 'Inserisci un voto: ';
-
+            votoText.innerText = `Inserisci un voto per ${studente.nome}:`;
 
             votoInput = document.createElement('input');
-            votoInput.type = 'text';
+            votoInput.type = 'number';
+            votoInput.min = 1;
+            votoInput.max = 10;
+
             votoInput.value = voto;
             votoInput.placeholder = 'Voto';
             votoInput.id = 'text-input-field';
@@ -408,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // const parentElement = addgrade.parentElement;
                 // parentElement.removeChild(addgrade);
                 location.reload();
-                
+
 
             })
         });
