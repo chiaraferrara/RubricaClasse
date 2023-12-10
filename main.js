@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             const editedStudent = registro.studenti.find(student => student.id === id); //trovo l'id dello studente per risalire a nome e cognome
-            const datiCorrenti = document.createElement('p');
+            const datiCorrenti = document.createElement('h2');
             datiCorrenti.innerText = `Stai modificando: ${editedStudent.nome} ${editedStudent.cognome}`;
 
 

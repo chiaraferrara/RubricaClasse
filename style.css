@@ -32,10 +32,6 @@ h1 {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  background: rgb(244, 244, 244);
-  background: linear-gradient(0deg, rgba(244, 244, 244, 1) 0%, rgba(203, 203, 203, 1) 0%, rgba(238, 238, 238, 1) 13%, rgba(255, 255, 255, 1) 13%, rgba(235, 235, 235, 1) 13%, rgba(249, 249, 249, 1) 89%);
-  border: 1px solid #ddd;
-  border-radius: 8px;
   padding: 7px;
   margin: auto;
   max-width: 100%;
@@ -122,14 +118,14 @@ p {
 }
 
 .grade-container {
-  width: 100%;
+
   border-radius: 1em;
   font-size: 14px;
-  padding: 20px;
   transition: visibility 0s, opacity 0.5s ease-in-out;
 }
 
 .grade-container.visible {
+  
   display: block;
   opacity: 1;
   background-color: #ffffff;
@@ -148,7 +144,6 @@ p {
 
   /* box-shadow: 2px 5px 2px #00000036; */
   border-radius: 1em;
-  margin-top: -66px;
 }
 
 textarea {
@@ -158,12 +153,10 @@ textarea {
 .edit-info-container {
   /* width: 100%;  */
   margin-left: 0;
-  border-radius: 1em;
   font-size: 14px;
   background-color: #ffffff;
   /* padding: 20px; */
   position: static;
-  margin-top: -56px;
 
 }
 
