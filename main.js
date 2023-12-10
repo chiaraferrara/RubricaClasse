@@ -149,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const editimg = document.createElement('img');
         editimg.src = 'assets/edit.svg'
         editButton.appendChild(editimg);
+        editButton.title = 'Modifica Info';
         personContainer.appendChild(editButton); //fa apparire il bottone edit all'interno di people-container.
 
         //aggiungi voto
@@ -157,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const gradeimg = document.createElement('img');
         gradeimg.src = 'assets/grade.svg'
         gradeButton.appendChild(gradeimg);
+        gradeButton.title = 'Aggiungi Voto';
         personContainer.appendChild(gradeButton);
 
         //se clicco devo modificare le info 
@@ -236,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const viewimg = document.createElement('img');
         viewimg.src = 'assets/viewtable.svg';
         viewGrade.appendChild(viewimg);
+        viewGrade.title = 'Voti';
         personContainer.appendChild(viewGrade);
 
         //eventListener viewVoti
@@ -310,6 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const deleteimg = document.createElement('img');
         deleteimg.src = 'assets/delete.svg';
         deleteBtn.appendChild(deleteimg);
+        deleteBtn.title = 'Elimina';
         personContainer.appendChild(deleteBtn);
 
 
@@ -340,6 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //durante l'aggiunta del voto non posso modificare lo studente.
         gradeButton.addEventListener('click', () => {
             registro.disableButtons();
+            addgrade.classList.add('visible');
             votoText = document.createElement('p');
             votoText.type = 'text';
             votoText.innerText = `Inserisci un voto per ${studente.nome}:`;
@@ -426,6 +431,27 @@ document.addEventListener('DOMContentLoaded', () => {
         surnameinput.value = ''
     }
     )
+
+
+    surnameinput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            const nameInput = document.getElementById('name-input-field');
+    const surnameInput = document.getElementById('surname-input-field');
+    if (!nameInput || !surnameInput || nameInput.value.trim() === '' || surnameInput.value.trim() === '') {
+        return;
+    } else {
+        const name = nameInput.value;
+        const surname = surnameInput.value;
+        const id = countid++;
+
+        registro.aggiungiStudente(id, name, surname);
+
+        // Aggiorna la pagina dopo aver aggiunto uno studente
+        location.reload();
+    }
+        }
+    });
+
 })
 addButton.addEventListener('click', () => {
     registro.enableButtons();

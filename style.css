@@ -1,58 +1,70 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Yusei+Magic&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&display=swap");
-.container{
-  display: flex;
-  flex-flow: row wrap;
-  align-items: flex-start;
-  justify-content: center;
+
+body {
+  font-family: "League Spartan", sans-serif;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
 }
-header, h1{
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+header, h1 {
   text-align: center;
   font-size: 2em;
+  margin-bottom: 20px;
 }
+
 .person-item-container {
   display: flex;
-  flex-flow: row wrap;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 50rem;
+  padding: 15px;
+  width: 400px;
 }
+
+.person-item-container img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
 .btn-rubrica {
   height: fit-content;
   margin-inline: 2px;
 }
 
-body {
-  font-family: "League Spartan", system-ui, sans-serif;
-  background: #ffffff;
-  font-size: 12px;
-}
-
 #text-input-field,
 #name-input-field,
 #surname-input-field {
-  font-size: 18px;
-  padding: 10px 10px 10px 5px;
-  width: 80px;
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
   border: none;
   border-bottom: 1px solid #bdbdbd;
+  margin-bottom: 10px;
 }
+
 section {
   text-align: center;
   padding: 2%;
   background-color: white;
-  border-radius: 0em;
+  border-radius: 0.5em;
   margin: auto;
-  /* box-shadow: 1px 8px 13px #ffffff6e; */
-  
 }
-
 
 #person-name,
 #person-surname,
@@ -61,8 +73,7 @@ section {
   margin-inline-start: 0;
   margin-top: 1px;
   font-weight: bolder;
-
-  font-size: 1.4em;
+  font-size: 1.2em;
 }
 
 #person-surname {
@@ -70,79 +81,100 @@ section {
 }
 
 .input-group {
-  margin-bottom: 5%;
+  margin-bottom: 20px;
   display: flex;
-  flex-flow: row wrap;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
 
-#add-button {
-  border: 0px solid transparent;
+button {
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
 }
 
-button {
-  width: fit-content;
-  height: fit-content;
-  border: 0px solid transparent;
-  background-color: white;
+button:hover {
+  background: rgb(244,244,244);
+background: linear-gradient(0deg, rgba(244,244,244,1) 0%, rgba(255,255,255,1) 0%, rgba(227,227,227,1) 13%, rgba(255,255,255,1) 13%, rgba(235,235,235,1) 13%, rgba(249,249,249,1) 89%);
+transition: background 0.5s ease-in-out;
 }
+
 button:disabled {
-  background-color: rgb(255, 255, 255);
-  color: gray; 
+  background-color: #f0f0f0;
+  color: gray;
   cursor: not-allowed;
 }
+
 .person-info {
   font-weight: bolder;
   font-variant: small-caps;
+  font-size: 1.2em;
 }
 
-p{
-  font-size: 2em;
+p {
+  font-size: 1.8em;
   font-family: 'Mulish', sans-serif;
+  margin-bottom: 10px;
 }
 
-
-.grade-container{
+.grade-container {
   width: 300px;
   border-radius: 1em;
   box-shadow: 2px 5px 2px #00000036;
-  font-size: 12px;
+  font-size: 14px;
   margin-top: -152px;
-  position: relative;
+  background-color: #ffffff;
+  padding: 20px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease-in-out;
 }
 
 
-.grade-table-container{
-  font-size: 20px;
+.grade-container.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.grade-container.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+
+.grade-table-container {
+  font-size: 18px;
   width: fit-content;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 2px 5px 2px #00000036;
+  border-radius: 1em;
 }
 
-.edit-info-container{
-  margin-top: -50px;
-  margin-left: 20px;
+.edit-info-container {
+  margin-top: 10px;
 }
 
 @media only screen and (max-width: 768px) {
   .container {
-  
     justify-content: flex-start;
   }
 
   .person-item-container {
-    
     width: 100%;
   }
 
   .grade-container {
     position: absolute;
-    background-color: white;
     width: 100%;
+    padding: 10px;
+    visibility: hidden;
   }
 
   .edit-info-container {
-  
     margin-top: 0;
-    margin-left: 0;
   }
 }
